@@ -18,7 +18,7 @@ const ContentArea = ({ events }) => {
       try {
         setLoading(true);
         const formattedDate = format(new Date(selectedDate), "yyyy-MM-dd");
-        const response = await axios.get(`http://localhost:5000/api/admin/view?date=${formattedDate}`);
+        const response = await axios.get(`https://deploy-project-k4im.onrender.com/api/admin/view?date=${formattedDate}`);
         const filteredData = response.data.filter(
           (booking) => format(new Date(booking.selectedDate), "yyyy-MM-dd") === formattedDate
         );
