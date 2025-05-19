@@ -18,7 +18,7 @@ const GetAddOn = () => {
     const fetchAddOns = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:5000/api/admin/getAddOn');
+        const response = await axios.get('https://deploy-project-k4im.onrender.com/api/admin/getAddOn');
         setAddOns(response.data);
       } catch (error) {
         console.error('Failed to fetch add-ons:', error);
