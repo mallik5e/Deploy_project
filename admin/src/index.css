@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+body{
+   /* background-color:gainsboro;
+   background-color: #D6D6D6;
+   background-color: #E6E6E6;/
+   background-color: #EBEBEB
+   background-color:#f7f7f7;
+   background-color: #f8f8f8;
+   background-color:#E0E0E0;
+   backgound-color:#f0f0f0;*/
+   background-color: #eaeaea;
+    overflow: auto;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white; /* Ensure background */
+    z-index: 50; /* Keep above other elements */
+}
+
+/* styles.css or index.css */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;    /* Firefox */
+  }
+
+.glowing-image {
+  border-radius: 2px; /*optional, for smooth edges 
+  box-shadow:  0 0 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 255, 255, 0.3);
+  transition: box-shadow 0.3s ease;*/
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); 
+}
+
+/*.glowing-text {
+  text-shadow:
+   /* 0 0 5px #8b5cf6,     /* indigo-ish glow */
+   /* 0 0 10px #a78bfa,   /*  lighter purple */
+   /* 0 0 20px #ec4899;   /* pink glow */
+
+.glowing-text:hover {
+  text-shadow:
+    0 0 10px #8b5cf6, 
+    0 0 30px #ec4899;
+}
+
+.glowing-icon:hover {
+  box-shadow:
+    0 0 10px #8b5cf6, 
+    0 0 30px #ec4899;
+}
+
+.shadow-glow {
+  box-shadow:
+    0 0 30px 10px rgba(255, 255, 255, 0.5);
+
+}
+
