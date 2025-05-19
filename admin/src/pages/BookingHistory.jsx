@@ -22,7 +22,7 @@ const BookingHistory = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/admin/view");
+        const response = await fetch("https://deploy-project-k4im.onrender.com/api/admin/view");
         const data = await response.json();
         console.log("Fetched Data:", data);
         setBookings(data);
