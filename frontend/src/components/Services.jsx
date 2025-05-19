@@ -105,7 +105,7 @@ const Services = () => {
     const fetchServices = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:5000/api/user/get-event');
+        const response = await axios.get('https://deploy-project-k4im.onrender.com/api/user/get-event');
         const updatedServices = response.data.map(category => ({
           ...category,
           options: category.options.map(option => {
