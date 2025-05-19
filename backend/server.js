@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/user',userRouter)
 app.use('/api/admin',adminRouter)
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
 
 app.get('/', (req, res) => {
