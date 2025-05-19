@@ -72,7 +72,7 @@ export default function PaymentIntegration() {
     };
     
     try {
-      const response = await fetch("http://localhost:5000/api/admin/set-paymentgateway", {
+      const response = await fetch("https://deploy-project-k4im.onrender.com/api/admin/set-paymentgateway", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
