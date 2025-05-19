@@ -14,7 +14,7 @@ const ReferralDoughnutChart = () => {
 
   const fetchReferralData = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/view');
+      const res = await axios.get('https://deploy-project-k4im.onrender.com/api/admin/view');
       const bookings = res.data;
       console.log("booking data: ",bookings)
       const sourceCounts = {
