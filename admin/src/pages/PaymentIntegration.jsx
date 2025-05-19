@@ -24,7 +24,7 @@ export default function PaymentIntegration() {
   useEffect(() => {
     async function fetchSavedSettings() {
       try {
-        const response = await fetch("http://localhost:5000/api/admin/get-paymentgateway");
+        const response = await fetch("https://deploy-project-k4im.onrender.com/api/admin/get-paymentgateway");
         const data = await response.json();
         console.log("data",data)
         if (data.gateway) {
