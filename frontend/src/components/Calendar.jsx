@@ -37,7 +37,7 @@ const MonthlyCalendar = () => {
 
   useEffect(() => {
     if (!sessionStorage.getItem('visit-tracked')) {
-      fetch('http://localhost:5000/api/user/visit', {
+      fetch('https://deploy-project-k4im.onrender.com/api/user/visit', {
         method: 'POST',
       }).catch((err) => console.error('Visit tracking failed:', err));
   
