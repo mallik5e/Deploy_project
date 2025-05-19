@@ -32,7 +32,7 @@ const Navbar = () => {
 useEffect(() => {
   const handleNotificationClick = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/view');
+      const res = await axios.get('https://deploy-project-k4im.onrender.com/api/admin/view');
       const allBookings = res.data;
 
       const now = new Date();
