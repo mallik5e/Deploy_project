@@ -10,7 +10,7 @@ const Login = () => {
   const [password,setPassword] = useState('')
   const [name,setName] = useState('')
   
-  const backendUrl = "http://localhost:5000"
+  const backendUrl = "https://deploy-project-k4im.onrender.com"
   
   const token = localStorage.getItem('token')
 
