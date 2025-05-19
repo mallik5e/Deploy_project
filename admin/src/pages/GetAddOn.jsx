@@ -44,7 +44,7 @@ const GetAddOn = () => {
       return;
     }
     try {
-      await axios.put(`http://localhost:5000/api/admin/updateAddOn/${editingService._id}`, updatedService);
+      await axios.put(`https://deploy-project-k4im.onrender.com/api/admin/updateAddOn/${editingService._id}`, updatedService);
       console.log(updatedService)
       setAddOns((prevAddOns) =>
         prevAddOns.map((item) =>
@@ -61,7 +61,7 @@ const GetAddOn = () => {
 
   const handleDelete = async (serviceId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/admin/delete/${serviceId}`);
+      await axios.delete(`https://deploy-project-k4im.onrender.com/api/admin/delete/${serviceId}`);
       setAddOns(addOns.filter((item) => item._id !== serviceId));
       toast.success('Deleted Successfully')
     } catch (error) {
