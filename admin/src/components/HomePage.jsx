@@ -14,7 +14,7 @@ const HomePage = () => {
 
   const fetchBookingData = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/view');
+      const res = await axios.get('https://deploy-project-k4im.onrender.com/api/admin/view');
       const allBookings = res.data;
 
       const now = new Date();
@@ -70,7 +70,7 @@ const HomePage = () => {
 
   const fetchVisitCount = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/count');
+      const res = await axios.get('https://deploy-project-k4im.onrender.com/api/admin/count');
       const count = res.data;
       console.log("count response: ", count);
       setVisitsCount(count.stat.visits); // or count.visits if you change backend response
