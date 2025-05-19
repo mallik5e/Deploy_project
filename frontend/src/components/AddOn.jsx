@@ -9,7 +9,7 @@ const AddOn = () => {
   useEffect(() => {
     const fetchAddOns = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/user/getAddOn');
+        const response = await axios.get('https://deploy-project-k4im.onrender.com/api/user/getAddOn');
         const fetchedAddOns = response.data.map((addOn) => ({
           ...addOn,
           isSelected: bookingData.addOns?.some((selected) => selected._id === addOn._id) || false,
