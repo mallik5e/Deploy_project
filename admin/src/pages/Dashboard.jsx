@@ -111,7 +111,7 @@ const Dashboard = () => {
   {/*Fetch specific service bookings on content area table */}
   const handleServiceClick = async (serviceName) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/view?service=${serviceName}`);
+      const response = await fetch(`https://deploy-project-k4im.onrender.com/api/admin/view?service=${serviceName}`);
       const allEvents = await response.json();
   
       if (!Array.isArray(allEvents)) {
@@ -215,7 +215,7 @@ const Dashboard = () => {
   {/*Fetch booking for bar graph */}
   const fetchBookingsData = async (period) => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/view");
+      const response = await fetch("https://deploy-project-k4im.onrender.com/api/admin/view");
       const result = await response.json();
   
       //console.log("🔹 Raw API Data:", result);
