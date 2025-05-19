@@ -27,7 +27,7 @@ const PaymentSuccess = () => {
         setLoading(true);
 
         // 1. Fetch user info
-        const userRes = await axios.get(`http://localhost:5000/api/admin/get-userinfo/${bookingId}`);
+        const userRes = await axios.get(`https://deploy-project-k4im.onrender.com/api/admin/get-userinfo/${bookingId}`);
         const fullUserData = userRes.data;
 
         //console.log("fullUserData",fullUserData)
@@ -59,7 +59,7 @@ const PaymentSuccess = () => {
    
 
         // 2. Fetch company info
-        const companyRes = await axios.get('http://localhost:5000/api/admin/get-invoiceinfo');
+        const companyRes = await axios.get('https://deploy-project-k4im.onrender.com/api/admin/get-invoiceinfo');
         const fullCompanyData = companyRes.data;
 
         //console.log("fullCompanyData",fullCompanyData)
@@ -81,7 +81,7 @@ const PaymentSuccess = () => {
 
         console.log("Payload: ",payload)
 
-       const invoiceRes = await axios.post('http://localhost:5000/api/admin/generate-invoice', payload);
+       const invoiceRes = await axios.post('https://deploy-project-k4im.onrender.com/api/admin/generate-invoice', payload);
        console.log("invoice response: ",invoiceRes.data);
        setInvoiceData(invoiceRes.data);
 
@@ -112,7 +112,7 @@ const PaymentSuccess = () => {
      //console.log("Calling updatePaymentStatus...");
 
       try {
-        await axios.put(`http://localhost:5000/api/user/bookings/${bookingId}/payment-status`, {
+        await axios.put(`https://deploy-project-k4im.onrender.com/api/user/bookings/${bookingId}/payment-status`, {
           paymentStatus: statusParam,
           selectedDate: selectedDateParam,
           services: servicesParam
@@ -120,7 +120,7 @@ const PaymentSuccess = () => {
         console.log('Payment status updated successfully');
 
         // Send confirmation email after payment update
-        await axios.post('http://localhost:5000/api/admin/booking/send-confirmation-email', {
+        await axios.post('https://deploy-project-k4im.onrender.com/api/admin/booking/send-confirmation-email', {
           bookingId,
         });
         console.log('Confirmation email sent successfully');
