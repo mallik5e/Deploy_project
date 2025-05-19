@@ -40,7 +40,7 @@ const Dashboard = () => {
   {/*Fetch booking data of the current month for line graph */}
   const fetchBookingData = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin/view');
+      const res = await axios.get('https://deploy-project-k4im.onrender.com/api/admin/view');
       const bookings = res.data;
 
       const now = dayjs();
