@@ -135,7 +135,7 @@ const UserDetails = () => {
     updateBookingData(updatedBookingData);
     
     try {
-      const response = await axios.post(`${backendUrl}/api/user/booking`, updatedBookingData);
+      const response = await axios.post(`https://deploy-project-k4im.onrender.com/api/user/booking`, updatedBookingData);
       sessionStorage.setItem("bookingId", response.data.bookingId);
       setShowSaveButton(false);
       toast.success("Now make payment to confirm your booking.");
@@ -173,7 +173,7 @@ const UserDetails = () => {
      // Collapse the form on submit
     setIsCollapsed(true);
     try {
-      const response = await axios.post(`${backendUrl}/api/user/booking`, updatedBookingData);
+      const response = await axios.post(`https://deploy-project-k4im.onrender.com/api/user/booking`, updatedBookingData);
       sessionStorage.setItem("bookingId", response.data.bookingId);
       setShowSaveButton(false);
       toast.success("Now make payment to confirm your booking.");
@@ -193,7 +193,7 @@ const UserDetails = () => {
 
   useEffect(() => {
     // Fetch the active payment gateway from backend
-    fetch("http://localhost:5000/api/user/active-gateway")
+    fetch("https://deploy-project-k4im.onrender.com/api/user/active-gateway")
       .then((res) => res.json())
       .then((data) => setGateway(data.gateway))
       .catch((error) => console.error("Error fetching gateway:", error));
@@ -225,7 +225,7 @@ const UserDetails = () => {
     }
    
     try {
-        const response = await axios.post('http://localhost:5000/api/user/pay', {
+        const response = await axios.post('https://deploy-project-k4im.onrender.com/api/user/pay', {
             txnId: 'txn' + Date.now(),
             amount: totalAmount,
             productInfo: bookingData.services.map(service => service.name).join(', '),
@@ -264,7 +264,7 @@ const UserDetails = () => {
     }
     try {
       const orderId = "ORDER_" + new Date().getTime(); // Generate a unique order ID
-      const response = await axios.post("http://localhost:5000/api/user/initiate-payment", { totalAmount, orderId });
+      const response = await axios.post("https://deploy-project-k4im.onrender.com/api/user/initiate-payment", { totalAmount, orderId });
 
       if (response.data.success) {
           window.location.href = response.data.data.instrumentResponse.redirectInfo.url; // Redirect to PhonePe
@@ -300,7 +300,7 @@ const UserDetails = () => {
     }
     try {
       // Create order on backend
-      const { data } = await axios.post("http://localhost:5000/api/user/create-order", {
+      const { data } = await axios.post("https://deploy-project-k4im.onrender.com/api/user/create-order", {
         totalAmount,
         currency: "INR",
         receipt: `order_rcpt_${Date.now()}`,//creating an unique orderId for transaction.
@@ -324,7 +324,7 @@ const UserDetails = () => {
           console.log("razorpay_signature",razorpay_signature)
 
           // Send for verification
-          const verifyRes = await axios.post("http://localhost:5000/api/user/verify-payment", {
+          const verifyRes = await axios.post("https://deploy-project-k4im.onrender.com/api/user/verify-payment", {
             razorpay_order_id,
             razorpay_payment_id,
             razorpay_signature,
@@ -362,7 +362,7 @@ const handlePaypalPayment = async () => {
       return;
     }
   try {
-    const { data } = await axios.post("http://localhost:5000/api/user/create-payment", { totalAmount });
+    const { data } = await axios.post("https://deploy-project-k4im.onrender.com/api/user/create-payment", { totalAmount });
     console.log("data.approvalUrl: ",data.approvalUrl);
     if (data?.approvalUrl) {
       window.location.href = data.approvalUrl; // Redirect to PayPal
