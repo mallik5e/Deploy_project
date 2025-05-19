@@ -28,7 +28,7 @@ const SelectInvoice = () => {
 
    useEffect(() => {
          axios
-           .get("http://localhost:5000/api/admin/get-invoiceinfo")
+           .get("https://deploy-project-k4im.onrender.com/api/admin/get-invoiceinfo")
            .then((response) => {
              const template = (response.data.invoice.invoiceTemplate);
              console.log("Select template",template)
