@@ -298,7 +298,7 @@ const Services = () => {
  {showScrollIcon && (
         <button
           onClick={handleScrollClick}
-          className="fixed bottom-4 right-4 text-gray-600 text-4xl z-50 hover:text-gray-800 transition"
+          className="hidden xl:block fixed bottom-4 right-4 text-gray-600 text-4xl z-50 hover:text-gray-800 transition"
         >
           <IoChevronDownCircle size={55}
             className={`transform transition-transform duration-300 ${
