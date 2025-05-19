@@ -21,7 +21,7 @@ const AddOn = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/admin/createAddOn",
+        "https://deploy-project-k4im.onrender.com/api/admin/createAddOn",
         formData
       );
       console.log(response.data);
