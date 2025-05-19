@@ -19,7 +19,7 @@ export const EventProvider = ({ children }) => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/user/get-event');
+                const response = await axios.get('https://deploy-project-k4im.onrender.com/api/user/get-event');
                 console.log('Fetched categories:', response.data); // Debug log
                 setCategories(response.data);
             } catch (error) {
@@ -32,7 +32,7 @@ export const EventProvider = ({ children }) => {
 
     const addNewCategory = async (newCategory) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/admin/add-event', { category: newCategory });
+            const response = await axios.post('https://deploy-project-k4im.onrender.com/api/admin/add-event', { category: newCategory });
             const addedCategory = response.data;
             setCategories([...categories, addedCategory]); // Add new category to the list
             return addedCategory; // Return the newly added category
@@ -45,7 +45,7 @@ export const EventProvider = ({ children }) => {
 
     const addEvent = async (eventData) => {
         try {
-            await axios.post('http://localhost:5000/api/admin/add-event', eventData);
+            await axios.post('https://deploy-project-k4im.onrender.com/api/admin/add-event', eventData);
             toast.success("Service added successfully!");
         } catch (error) {
             console.error('Error adding event:', error);
@@ -63,7 +63,7 @@ export const EventProvider = ({ children }) => {
 
       const getProfileData = async() => {
         try{
-           const {data} = await axios.get("http://localhost:5000/api/admin/get-profile",{headers:{token}})
+           const {data} = await axios.get("https://deploy-project-k4im.onrender.com/api/admin/get-profile",{headers:{token}})
            if(data.success){
             setUserData(data.userData)
            }else{
