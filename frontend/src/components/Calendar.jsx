@@ -122,7 +122,7 @@ const MonthlyCalendar = () => {
         {/* calendar */}
       <div className='space-y-10 sm:space-y-3'>
      <h2 className="text-xl ml-4 lg:ml-20 text-violet-400 mt-4 font-bold">SELECT DATE FOR EVENT :</h2>
-     <div className="w-135 md:min-w-[690px] xl:min-w-[600px] max-h-120 mx-2 sm:mx-auto lg:ml-28 mt-6 p-4 px-6 bg-white rounded-2xl shadow-sm">
+     <div className="w-135 md:min-w-[690px] xl:min-w-[600px] max-h-120 mx-1 sm:mx-auto lg:ml-28 mt-6 p-4 px-6 bg-white rounded-2xl shadow-sm">
         {/* <h2 className="text-xl md:text-base mb-4 font-bold">SELECT DATE FOR EVENT :</h2>*/}
       <div className="flex justify-center gap-8 items-center mb-4">
         <button onClick={prevMonth} className={`p-2  rounded-xl ${currentDate.isSame(minMonth, 'month') ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={currentDate.isSame(minMonth, 'month')}>❮</button>
