@@ -19,7 +19,7 @@ const GetEvents = () => {
   const fetchEvents = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/admin/get-event");
+      const response = await fetch("https://deploy-project-k4im.onrender.com/api/admin/get-event");
       const data = await response.json();
       setEvents(data);
     } catch (error) {
@@ -39,7 +39,7 @@ const GetEvents = () => {
   
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/update-event`, {
+      const response = await fetch(`https://deploy-project-k4im.onrender.com/api/admin/update-event`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedService), // Now contains categoryId
@@ -63,7 +63,7 @@ const GetEvents = () => {
     }
   
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/delete-event/${serviceId}`, {
+      const response = await fetch(`https://deploy-project-k4im.onrender.com/api/admin/delete-event/${serviceId}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ categoryId, _id: serviceId }), // Ensure both categoryId and _id are sent
