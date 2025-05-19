@@ -15,7 +15,7 @@ const Transaction = () => {
     const fetchTransactions = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:5000/api/admin/view");
+        const response = await axios.get("https://deploy-project-k4im.onrender.com/api/admin/view");
         const data = response.data;
         const successfulPayments = data.filter(transaction => transaction.paymentStatus === "success");
         setTransactions(successfulPayments);
@@ -32,7 +32,7 @@ const Transaction = () => {
 
    useEffect(() => {
            axios
-             .get("http://localhost:5000/api/admin/get-invoiceinfo")
+             .get("https://deploy-project-k4im.onrender.com/api/admin/get-invoiceinfo")
              .then((response) => {
                const template = (response.data.invoice.invoiceTemplate);
                setInvoiceTemplate(template);
