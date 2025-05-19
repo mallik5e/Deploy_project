@@ -19,7 +19,7 @@ import InvoiceTemplate1 from './components/InvoiceTemplate1';
 import InvoiceTemplate2 from './components/InvoiceTemplate2';
 import InvoiceTemplate3 from './components/InvoiceTemplate3';
 import InvoiceTemplate4 from './components/InvoiceTemplate4';
-import SelectInvoice from './pages/selectInvoice';
+import SelectInvoice from './pages/SelectInvoice';
 import InvoiceTemplate5 from './components/InvoiceTemplate5';
 import MonthlyBookingsChart from './components/ReferralDoughnutChart';
 //import ProgressBar from './components/ProgressCircle';
