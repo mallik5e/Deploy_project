@@ -31,7 +31,7 @@ const MyProfile = () => {
     console.log("token frontend: ",token)
 
     useEffect(() => {
-      axios.get("http://localhost:5000/api/admin/get-profile",{headers:{token}})
+      axios.get("https://deploy-project-k4im.onrender.com/api/admin/get-profile",{headers:{token}})
           .then((response) => setUser(response.data.userData))
           .catch((error) => console.error(error));
   }, []);
@@ -54,7 +54,7 @@ const MyProfile = () => {
     const handleUpdate = async(e) => {
                 console.log("clicked")
                 try {
-                    const response = await axios.put(`http://localhost:5000/api/admin/update-admin/${email}`,user);
+                    const response = await axios.put(`https://deploy-project-k4im.onrender.com/api/admin/update-admin/${email}`,user);
               
                     if (response.status === 200) {
                       toast.success('Data Updated Successfully')
