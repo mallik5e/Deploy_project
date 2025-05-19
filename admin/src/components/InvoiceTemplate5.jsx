@@ -46,7 +46,7 @@ const InvoiceTemplate5 = () => {
     }
     const fetchTransaction = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/admin/get-userinfo/${bookingId}`);
+        const res = await axios.get(`https://deploy-project-k4im.onrender.com/api/admin/get-userinfo/${bookingId}`);
         //console.log("invoicetemp1: ",res.data);
         const data = res.data.data;
         //console.log("data: ",data);
@@ -62,7 +62,7 @@ const InvoiceTemplate5 = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/admin/get-invoiceinfo")
+      .get("https://deploy-project-k4im.onrender.com/api/admin/get-invoiceinfo")
       .then((response) => {
         const invoice = response.data.invoice;
 
@@ -169,7 +169,7 @@ const InvoiceTemplate5 = () => {
     
       // 🚀 Send to backend
       try {
-        const response = await axios.put("http://localhost:5000/api/admin/update-invoice", formData, {
+        const response = await axios.put("https://deploy-project-k4im.onrender.com/api/admin/update-invoice", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
     
@@ -185,7 +185,7 @@ const InvoiceTemplate5 = () => {
     const handleSaveTemplate = async() => {
       console.log("invoice selected: ",invoice)
       try {
-        const response = await axios.put("http://localhost:5000/api/admin/update-template", {
+        const response = await axios.put("https://deploy-project-k4im.onrender.com/api/admin/update-template", {
           invoiceTemplate: invoice
         });
         toast.success("Template Saved for Invoice")
