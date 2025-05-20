@@ -18,6 +18,8 @@ const MonthlyCalendar = () => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const images = [
     { src: PhotoShoots_Super_Package, alt: 'PhotoShoots_Super_Package Offer' },
     { src: PhotoShoots_Popular_Package, alt: 'PhotoShoots_Popular_Package Offer' },
@@ -37,7 +39,7 @@ const MonthlyCalendar = () => {
 
   useEffect(() => {
     if (!sessionStorage.getItem('visit-tracked')) {
-      fetch('https://deploy-project-k4im.onrender.com/api/user/visit', {
+      fetch(backendUrl+'/api/user/visit', {
         method: 'POST',
       }).catch((err) => console.error('Visit tracking failed:', err));
   
@@ -97,6 +99,7 @@ const MonthlyCalendar = () => {
           name="description"
           content="Book your next photoshoot online. Find top photoshoot packages for pre-wedding, birthday, and maternity shoots in your city. Packages from ₹500."
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="keywords" content="photoshoot, pre-wedding, maternity, book photoshoot online, family photoshoot, photoshoot in bangalore,post wedding photoshoot in bangalore, pre wedding photo shoot places in bangalore, maternity photoshoot in bangalore, photoshoot places in kanakapura road, outdoor photoshoot places in bangalore" />
         <meta name="author" content="Book Event" />
         <link rel="canonical" href="http://localhost:5173/" />
@@ -117,13 +120,13 @@ const MonthlyCalendar = () => {
       </div>
 
       {/* includes both calendar and image */}
-      <div className="xl:flex lg:space-x-18 items-start gap-2" >
+      <div className="xl:flex lg:space-x-18  gap-2" >
   
         {/* calendar */}
       <div className='space-y-10 sm:space-y-3'>
      <h2 className="text-xl ml-4 lg:ml-20 text-violet-400 mt-4 font-bold">SELECT DATE FOR EVENT :</h2>
-     <div className="w-135 md:min-w-[690px] xl:min-w-[600px] max-h-120 mx-1 sm:mx-auto lg:ml-28 mt-6 p-4 px-6 bg-white rounded-2xl shadow-sm">
-        {/* <h2 className="text-xl md:text-base mb-4 font-bold">SELECT DATE FOR EVENT :</h2>*/}
+        <div className="w-135 md:min-w-[690px] xl:min-w-[600px] max-h-120 mx-2 sm:mx-auto lg:ml-28 mt-6 p-4 px-6 bg-white rounded-2xl shadow-sm">
+            {/* <h2 className="text-xl md:text-base mb-4 font-bold">SELECT DATE FOR EVENT :</h2>*/}
       <div className="flex justify-center gap-8 items-center mb-4">
         <button onClick={prevMonth} className={`p-2  rounded-xl ${currentDate.isSame(minMonth, 'month') ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={currentDate.isSame(minMonth, 'month')}>❮</button>
         <h2 className="text-xl font-bold">{currentDate.format('MMMM YYYY')}</h2>
