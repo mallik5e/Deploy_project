@@ -83,7 +83,7 @@ const GetEvents = () => {
   
 
   return (
-    <div className="relative mx-10 my-4 bg-white shadow-lg rounded-2xl p-6 transition-all duration-300">
+    <div className="relative md:mx-10 my-4 bg-white shadow-lg rounded-2xl p-6 transition-all duration-300">
       {/* Full-Page Blur Effect when Modal is Open */}
       {selectedService && <div className="fixed inset-0 backdrop-blur-md z-40"></div>}
 
