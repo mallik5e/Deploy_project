@@ -183,7 +183,7 @@ const MonthlyCalendar = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       <img
-         className="w-[550px] h-[560px] sm:w-[550px] sm:h-[460px] md:min-w-170 md:min-h-125"
+         className="w-[550px] h-[460px] md:min-w-170 md:min-h-125"
          src={images[currentIndex].src} 
          alt={images[currentIndex].alt}
          loading="eager" fetchpriority="high"
