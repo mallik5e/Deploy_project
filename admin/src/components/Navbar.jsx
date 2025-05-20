@@ -16,6 +16,7 @@ import axios from 'axios'
 const Navbar = () => {
   const [isSettingsOpen, setSettingsOpen] = useState(false);
   const [isProfileOpen, setProfileOpen] = useState(false);
+  const [isNavbarOpen, setNavbarOpen] = useState(false);
   const [showMenu,setShowMenu] = useState(false);
   const settingsRef = useRef(null);
   const profileRef = useRef(null);
@@ -28,11 +29,13 @@ const Navbar = () => {
 
   const token = localStorage.getItem('token')
 
+   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 useEffect(() => {
   const handleNotificationClick = async () => {
     try {
-      const res = await axios.get('https://deploy-project-k4im.onrender.com/api/admin/view');
+      const res = await axios.get(backendUrl+'/api/admin/view');
       const allBookings = res.data;
 
       const now = new Date();
@@ -67,6 +70,7 @@ useEffect(() => {
    if(token){
     setSettingsOpen(!isSettingsOpen);
     setProfileOpen(false); // Close profile dropdown if open
+    setNavbarOpen(false);
    }else{
     toast.warn('Login to Access')
    }
@@ -76,10 +80,21 @@ useEffect(() => {
     if(token){
      setProfileOpen(!isProfileOpen);
      setSettingsOpen(false); // Close settings dropdown if open
+     setNavbarOpen(false);
     }else{
       toast.warn('Login to Access')
     }
   };
+
+  const toggleNavbarDropdown = () => {
+    if(token){
+     setNavbarOpen(!isNavbarOpen);
+     setProfileOpen(false);
+     setSettingsOpen(false); // Close settings dropdown if open
+    }else{
+      toast.warn('Login to Access')
+    }
+  }
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -223,19 +238,20 @@ useEffect(() => {
 
 {/* Mobile Menu Button 
 <img onClick={()=>setShowMenu(true)} className='w-7 md:hidden' src={menu_icon} alt="" />*/}
-<button onClick={()=>setShowMenu(true)} className='w-7 md:hidden'><BiMenuAltRight size={45}/></button>
+<button onClick={toggleNavbarDropdown} className='w-7 md:hidden'><BiMenuAltRight size={45}/></button>
                    {/* ------- mobile menu ---- */}
-                   <div className={` ${showMenu ? 'fixed w-full h-full' : 'h-0 w-0'} md:hidden right-0 top-0 bottom-0 z-30 overflow-hidden bg-white transition-all  ease-in-out shadow-lg`}>
+                  { isNavbarOpen && (
+                      <div className={`fixed w-full h-full md:hidden right-0 top-0 bottom-0 z-30 overflow-hidden bg-white transition-all  ease-in-out shadow-lg`}>
   <div className="flex items-center justify-between px-4 py-5 border-b shadow-sm">
     <img className="w-32 h-auto" src={logo} alt="Logo" />
-    <button onClick={() => setShowMenu(false)} className="p-2">
+    <button onClick={() => setNavbarOpen(false)} className="p-2">
       <img className="w-8 h-8" src={cross_icon} alt="Close Menu" />
     </button>
   </div>
 
   <ul className="flex flex-col items-center mt-10 gap-6 px-5">
   <NavLink 
-    onClick={() => setShowMenu(false)} 
+    onClick={() => setNavbarOpen(false)} 
     to="/dashboard" 
     className="w-full text-center py-2.5 rounded-lg hover:bg-gray-100 transition-all font-semibold text-2xl flex items-center justify-center gap-4"
   >
@@ -243,7 +259,7 @@ useEffect(() => {
     <span>Home</span>
   </NavLink>
   <NavLink 
-    onClick={() => setShowMenu(false)} 
+    onClick={() => setNavbarOpen(false)} 
     to="/events" 
     className="w-full text-center py-2.5 rounded-lg hover:bg-gray-100 transition-all font-semibold text-2xl flex items-center justify-center gap-4"
   >
@@ -251,7 +267,7 @@ useEffect(() => {
     <span>Events</span>
   </NavLink>
   <NavLink 
-    onClick={() => setShowMenu(false)} 
+    onClick={() => setNavbarOpen(false)} 
     to="/add-ons" 
     className="w-full text-center py-2.5 rounded-lg hover:bg-gray-100 transition-all font-semibold text-2xl flex items-center justify-center gap-4"
   >
@@ -259,7 +275,7 @@ useEffect(() => {
     <span>Add-Ons</span>
   </NavLink>
   <NavLink 
-    onClick={() => setShowMenu(false)} 
+    onClick={() => setNavbarOpen(false)} 
     to="/history" 
     className="w-full text-center py-2.5 rounded-lg hover:bg-gray-100 transition-all font-semibold text-2xl flex items-center justify-center gap-4"
   >
@@ -269,6 +285,7 @@ useEffect(() => {
 </ul>
 
 </div>
+ )}
 
 
       </div>
