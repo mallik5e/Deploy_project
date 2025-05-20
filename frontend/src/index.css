@@ -16,7 +16,7 @@ body {
   background-image: url('./assets/img_12.jpg');
   background-size: cover;
   background-position: center;
-  margin: 0;
+  overflow-x: hidden;
 }
 
 /* Light overlay to make the background image appear lighter */
