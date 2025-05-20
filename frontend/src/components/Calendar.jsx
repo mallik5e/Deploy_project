@@ -125,14 +125,14 @@ const MonthlyCalendar = () => {
         {/* calendar */}
       <div className='space-y-10 sm:space-y-3'>
      <h2 className="text-xl ml-4 lg:ml-20 text-violet-400 mt-4 font-bold">SELECT DATE FOR EVENT :</h2>
-        <div className="w-full sm:max-w-[690px] xl:w-[600px] max-h-120 sm:mx-auto lg:ml-28 mt-6 p-3 md:p-4 px-4 md:px-6 bg-white/90 rounded-2xl shadow-sm">
+        <div className="w-full sm:max-w-[690px] xl:w-[600px]  sm:mx-auto lg:ml-28 mt-6 py-3 md:p-4 sm:px-6 bg-white/90 rounded-2xl shadow-sm">
             {/* <h2 className="text-xl md:text-base mb-4 font-bold">SELECT DATE FOR EVENT :</h2>*/}
       <div className="flex justify-center gap-8 items-center mb-4">
         <button onClick={prevMonth} className={`p-2  rounded-xl ${currentDate.isSame(minMonth, 'month') ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={currentDate.isSame(minMonth, 'month')}>❮</button>
         <h2 className="text-xl font-bold">{currentDate.format('MMMM YYYY')}</h2>
         <button onClick={nextMonth} className={`p-2  rounded-xl ${currentDate.isSame(maxMonth, 'month') ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={currentDate.isSame(maxMonth, 'month')}>❯</button>
       </div>
-      <div className="grid grid-cols-7 gap-6 lg:gap-2 space-y-1 lg:space-y-2">
+      <div className="grid grid-cols-7 gap-3 space-y-1 lg:space-y-2">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
           <div key={day} className="text-center text-lg py-1 font-semibold">
             {day}
@@ -159,7 +159,7 @@ const MonthlyCalendar = () => {
     
 
     {/*button for selected date */}
-    <div className="hidden xl:flex justify-between mt-7 ml-28">
+    <div className="hidden xl:flex justify-between mt-2 ml-28">
   {
     bookingData.selectedDate && (
       <button 
@@ -178,7 +178,7 @@ const MonthlyCalendar = () => {
    </div>
 
    {/*images */}
-   <div className="flex w-[550px] mx-auto lg:mx-30 lg:my-10 xl:m-2 md:min-w-175 md:max-h-135">
+   <div className="flex w-[550px] mx-auto lg:mx-30 lg:my-10 xl:m-5 sm:min-w-175 md:max-h-135">
     <div className="relative flex items-center justify-center mt-8 lg:mt-12"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
