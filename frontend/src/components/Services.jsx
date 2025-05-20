@@ -63,6 +63,7 @@ const Services = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
  const [atBottom, setAtBottom] = useState(false);
   const [showScrollIcon, setShowScrollIcon] = useState(false);
@@ -105,7 +106,7 @@ const Services = () => {
     const fetchServices = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('https://deploy-project-k4im.onrender.com/api/user/get-event');
+        const response = await axios.get(backendUrl+'/api/user/get-event');
         const updatedServices = response.data.map(category => ({
           ...category,
           options: category.options.map(option => {
@@ -180,6 +181,7 @@ const Services = () => {
                   name="description"
                   content="Book your next photoshoot online. Find top photoshoot packages for pre-wedding, birthday, and maternity shoots in your city. Packages from ₹500."
               />
+               <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
                <meta name="keywords" content="photoshoot, pre-wedding, maternity, book photoshoot online, family photoshoot, photoshoot in bangalore,post wedding photoshoot in bangalore, pre wedding photo shoot places in bangalore, maternity photoshoot in bangalore, photoshoot places in kanakapura road, outdoor photoshoot places in bangalore" />
                <meta name="author" content="Book Event" />
       
