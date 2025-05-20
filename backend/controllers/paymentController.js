@@ -104,7 +104,7 @@ const verifyStatus = (req, res) => {
         merchantTransactionId: merchantTransactionId,  // ✅ Ensure correct key name
         amount: totalAmount * 100,
         mobileNumber: "9999999999",
-        redirectUrl:`http://localhost:5000/api/user/payment-status/${merchantTransactionId}`,
+        redirectUrl:`https://deploy-project-1-ndgn.onrender.com/api/user/payment-status/${merchantTransactionId}`,
         redirectMode:'POST',
         paymentInstrument: { type: "PAY_PAGE" }
       };
@@ -168,13 +168,13 @@ const phonepeStatus = async (req, res) => {
         const data = statusResponse.data;
 
         if (data.success && data.code === "PAYMENT_SUCCESS" && data.data.state === "COMPLETED") {
-            return res.redirect(`http://localhost:5173/success?txnId=${txnId}`);
+            return res.redirect(`https://deploy-project-1-ndgn.onrender.com/success?txnId=${txnId}`);
         } else {
-            return res.redirect(`http://localhost:5173/failure?txnId=${txnId}`);
+            return res.redirect(`https://deploy-project-1-ndgn.onrender.com/failure?txnId=${txnId}`);
         }
     } catch (error) {
         console.error("Error verifying transaction:", error);
-        return res.redirect(`http://localhost:5173/failure?txnId=${txnId}`);
+        return res.redirect(`https://deploy-project-1-ndgn.onrender.com/failure?txnId=${txnId}`);
     }
 };
 
