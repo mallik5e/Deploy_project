@@ -213,7 +213,7 @@ const Services = () => {
               </h3>
               {openCategory[category.category] &&
                 category.options.map((service) => (
-                  <div key={service._id} className="flex justify-between items-center bg-gray-50 rounded-lg px-1 py-4 mb-4 md:p-4 md:mb-2">
+                  <div key={service._id} className="flex justify-between items-center bg-gray-50 rounded-lg px-2 py-4 mb-4 md:p-4 md:mb-2">
                     <div className="flex flex-col">
                       <span className="text-lg font-semibold">{service.name}</span>
                       <span className="text-green-600 text-lg font-medium">₹{service.price}</span>
