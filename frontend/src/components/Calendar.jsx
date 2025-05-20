@@ -125,7 +125,7 @@ const MonthlyCalendar = () => {
         {/* calendar */}
       <div className='space-y-10 sm:space-y-3'>
      <h2 className="text-xl ml-4 lg:ml-20 text-violet-400 mt-4 font-bold">SELECT DATE FOR EVENT :</h2>
-        <div className="w-135 md:min-w-[690px] xl:min-w-[600px] max-h-120 mx-2 sm:mx-auto lg:ml-28 mt-6 p-4 px-6 bg-white rounded-2xl shadow-sm">
+        <div className="w-full sm:max-w-[690px] xl:w-[600px] max-h-120 sm:mx-auto lg:ml-28 mt-6 p-3 md:p-4 px-4 md:px-6 bg-white/80 rounded-2xl shadow-sm">
             {/* <h2 className="text-xl md:text-base mb-4 font-bold">SELECT DATE FOR EVENT :</h2>*/}
       <div className="flex justify-center gap-8 items-center mb-4">
         <button onClick={prevMonth} className={`p-2  rounded-xl ${currentDate.isSame(minMonth, 'month') ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={currentDate.isSame(minMonth, 'month')}>❮</button>
@@ -178,7 +178,7 @@ const MonthlyCalendar = () => {
    </div>
 
    {/*images */}
-   <div className="flex w-[550px] m-auto lg:mx-30 lg:my-10 xl:m-0 md:min-w-175 md:max-h-135">
+   <div className="flex w-[550px] m-auto lg:mx-30 lg:my-10 xl:m-2 md:min-w-175 md:max-h-135">
     <div className="relative flex items-center justify-center mt-8 lg:mt-12"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
