@@ -216,7 +216,7 @@ const Services = () => {
                   <div key={service._id} className="flex justify-between items-center bg-gray-50 rounded-lg px-1 py-4 mb-4 md:p-4 md:mb-2">
                     <div className="flex flex-col">
                       <span className="text-lg font-semibold">{service.name}</span>
-                      <span className="text-green-600 text-xl font-medium">₹{service.price}</span>
+                      <span className="text-green-600 text-lg font-medium">₹{service.price}</span>
                     </div>
                     {
                       service.slotsLeft > 0 ? (
@@ -235,7 +235,7 @@ const Services = () => {
                             onQuantityChange={(quantity) => updateServiceQuantity(service._id, quantity)}
                           />
                         )}
-                        <span className={`${service.slotsLeft < 10 ? 'text-red-500 border-red-500' : 'text-green-500 border-green-500'} text-[12px] md:text-[10px] text-center border px-2 py-1 rounded-2xl font-semibold`}>
+                        <span className={`${service.slotsLeft < 10 ? 'text-red-500 border-red-500' : 'text-green-500 border-green-500'} text-[10px] text-center border px-2 py-1 rounded-2xl font-semibold`}>
                           {service.slotsLeft} Left
                         </span>
                       </div>
@@ -291,7 +291,7 @@ const Services = () => {
      <button
      onClick={handleProceed}
      disabled={services.length === 0}
-     className={`w-full py-5 mt-4 text-2xl md:text-xl 
+     className={`w-full py-4 mt-4 text-xl 
      ${services.length === 0 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 text-white"}`}>
      Proceed
     </button>
