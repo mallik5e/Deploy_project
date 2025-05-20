@@ -38,12 +38,22 @@ body > * {
   z-index: 1;
 }
 
+@media (max-width: 500px) {
+  .custom-img {
+    width: 100%;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 767px) {
+  .custom-img {
+    width: 600px;
+  }
+}
+
 .glowing-box {
    /*optional, for smooth edges */
   box-shadow: 0 0 10px rgba(255, 255, 255, 1); 
 }
-
-
   
   .glow-button::before {
     content: "";
