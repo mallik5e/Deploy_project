@@ -120,7 +120,7 @@ const MonthlyCalendar = () => {
       </div>
 
       {/* includes both calendar and image */}
-      <div className="xl:flex lg:space-x-18  gap-2" >
+      <div className="xl:flex lg:space-x-18  gap-2 " >
   
         {/* calendar */}
       <div className='space-y-10 sm:space-y-3'>
@@ -148,7 +148,7 @@ const MonthlyCalendar = () => {
               <div
                 key={day}
                 onClick={() => !isPastDate && selectDate(day)}
-                className={`text-center p-2 text-xl lg:text-base rounded-xl hover:bg-blue-100 cursor-pointer ${isPastDate ? 'opacity-50 cursor-not-allowed' : (bookingData.selectedDate === date.format('YYYY-MM-DD') ? 'bg-blue-200' : 'hover:bg-blue-100')}`}
+                className={`text-center p-2 text-lg lg:text-base rounded-xl hover:bg-blue-100 cursor-pointer ${isPastDate ? 'opacity-50 cursor-not-allowed' : (bookingData.selectedDate === date.format('YYYY-MM-DD') ? 'bg-blue-200' : 'hover:bg-blue-100')}`}
               >
                 {day}
               </div>
@@ -203,17 +203,17 @@ const MonthlyCalendar = () => {
   <div className="fixed bottom-0 left-0 w-full shadow-md z-50 xl:hidden">
     <button
       onClick={handleProceed}
-      className="bg-blue-500 text-white text-2xl lg:text-3xl px-4 py-6 lg:py-7 w-full flex justify-between items-center"
+      className="bg-blue-500 text-white text-xl lg:text-2xl p-4 lg:py-7 w-full flex justify-between items-center"
     >
       <span className="flex gap-2">
-        <CalendarDays size={34} className='items-center text-center'/>
+        <CalendarDays size={30} className='items-center text-center'/>
         {new Date(bookingData.selectedDate).toLocaleDateString('en-GB', {
           day: '2-digit',
           month: 'short'
         }).replace(/(\d{2}) (\w{3})/, '$1 $2\'')}
         {new Date(bookingData.selectedDate).getFullYear().toString().slice(-2)}
       </span>
-      <span className="flex gap-1 font-semibold">Proceed <ChevronRight size={32} className='items-center text-center'/></span>
+      <span className="flex gap-1 font-semibold">Proceed <ChevronRight size={30} className='items-center text-center'/></span>
     </button>
   </div>
 )}
