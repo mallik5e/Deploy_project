@@ -244,7 +244,7 @@ useEffect(() => {
   </NavLink>
   <NavLink 
     onClick={() => setShowMenu(false)} 
-    to="/add-events" 
+    to="/events" 
     className="w-full text-center py-2.5 rounded-lg hover:bg-gray-100 transition-all font-semibold text-2xl flex items-center justify-center gap-4"
   >
     <MdEvent className="text-xl" size={36}/>
