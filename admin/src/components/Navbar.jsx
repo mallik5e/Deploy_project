@@ -130,7 +130,7 @@ useEffect(() => {
   Elements Admin
 </div>*/}
 
-    <div className="hidden md:block text-3xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+    <div className="hidden sm:block text-3xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
       Elements Admin
       </div>
 
@@ -139,7 +139,7 @@ useEffect(() => {
       {/* Navigation Links */}
      {
       token && (
-    <ul className="hidden md:flex space-x-8 text-gray-700">
+    <ul className="hidden lg:flex space-x-8 text-gray-700">
        <li><Link to="/dashboard" className="hover:text-blue-500 font-bold glowing-text">Home</Link></li>
        <li><Link to="/events" className="hover:text-blue-500 font-bold glowing-text">Events</Link></li>
        <li><Link to="/add-ons" className="hover:text-blue-500 font-bold glowing-text">Add-Ons</Link></li>
@@ -159,26 +159,24 @@ useEffect(() => {
       
         {/* Settings Dropdown */}
         <div className="relative" ref={settingsRef}>
-          <button onClick={toggleSettingsDropdown} className="hover:text-blue-500 bg-white rounded-full p-2 glowing-icon">
+          <button onClick={toggleSettingsDropdown} className="relative hover:text-blue-500 bg-white rounded-full p-2 glowing-icon">
             <IoSettingsOutline size={24} />
           </button>
 
           {isSettingsOpen && (
-            <div className="absolute right-0 top-10 bg-white shadow-lg rounded-lg w-48">
+            <div className="absolute right-0 top-10 bg-white shadow-lg rounded-lg w-48 overflow-hidden">
               <ul className="text-gray-800">
               <Link to='/payment'><li onClick={() => setSettingsOpen(false)} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Payment Integration</li></Link>
               <Link to='/transaction'><li onClick={() => setSettingsOpen(false)} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Transactions</li></Link>
-              <Link to='/select-invoice'><li onClick={() => setSettingsOpen(false)} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Invoice</li></Link> 
-             
+              <Link to='/select-invoice'><li onClick={() => setSettingsOpen(false)} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Invoice</li></Link>              
               </ul>
             </div>
           )}
         </div>
-
         
 
         {/* Notification Icon */}
-       <button aria-label="Notifications"  onClick={() => setShowNotifications(true)} className="relative hidden md:block hover:text-blue-500 bg-white rounded-full glowing-icon">
+       <button aria-label="Notifications"  onClick={() => setShowNotifications(true)} className="relative hidden sm:block hover:text-blue-500 bg-white rounded-full glowing-icon">
          <IoNotificationsOutline size={26}  />
          {unpaidBookings.length > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-500 rounded-full text-white text-xs px-1">
@@ -238,10 +236,10 @@ useEffect(() => {
 
 {/* Mobile Menu Button 
 <img onClick={()=>setShowMenu(true)} className='w-7 md:hidden' src={menu_icon} alt="" />*/}
-<button onClick={toggleNavbarDropdown} className='w-7 md:hidden'><BiMenuAltRight size={45}/></button>
+<button onClick={toggleNavbarDropdown} className='w-7 lg:hidden'><BiMenuAltRight size={45}/></button>
                    {/* ------- mobile menu ---- */}
                   { isNavbarOpen && (
-                      <div className={`fixed w-full h-full md:hidden right-0 top-0 bottom-0 z-30 overflow-hidden bg-white transition-all  ease-in-out shadow-lg`}>
+                      <div className={`fixed w-full h-full right-0 top-0 bottom-0 z-30 overflow-hidden bg-white transition-all  ease-in-out shadow-lg`}>
   <div className="flex items-center justify-between px-4 py-5 border-b shadow-sm">
     <img className="w-32 h-auto" src={logo} alt="Logo" />
     <button onClick={() => setNavbarOpen(false)} className="p-2">
