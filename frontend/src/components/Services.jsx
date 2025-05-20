@@ -197,7 +197,7 @@ const Services = () => {
       <hr className="border-t-4 border-gray-300 mx-4 lg:mx-10 my-2 w-[90%]" />
       </div>
     <div className='flex'>
-      <div className="min-h-screen min-w-250 md:min-w-full lg:min-w-250  p-2 lg:p-8">
+      <div className="min-h-screen md:min-w-full lg:min-w-250  p-2 lg:p-8">
        
 
         {loading ? (
@@ -207,24 +207,24 @@ const Services = () => {
           </div>
         ) : servicesData.length > 0 ? (
           servicesData.map((category) => (
-            <div key={category.category} className="bg-white rounded-2xl shadow-lg p-8 mb-8 md:p-5 md:mb-5">
-              <h3 onClick={() => toggleCategory(category.category)} className="text-3xl md:text-lg gap-10 flex justify-between font-semibold text-blue-600 mb-4">
+            <div key={category.category} className="bg-white rounded-2xl shadow-lg p-5 mb-5">
+              <h3 onClick={() => toggleCategory(category.category)} className="text-lg gap-10 flex justify-between font-semibold text-blue-600 mb-4">
                 {category.category} {openCategory[category.category] ? <Minus /> : <Plus />}
               </h3>
               {openCategory[category.category] &&
                 category.options.map((service) => (
-                  <div key={service._id} className="flex justify-between items-center bg-gray-50 rounded-lg px-1 py-8 mb-4 md:p-4 md:mb-2">
+                  <div key={service._id} className="flex justify-between items-center bg-gray-50 rounded-lg px-1 py-4 mb-4 md:p-4 md:mb-2">
                     <div className="flex flex-col">
-                      <span className="text-3xl md:text-lg font-semibold">{service.name}</span>
-                      <span className="text-green-600 text-3xl md:text-xl font-medium">₹{service.price}</span>
+                      <span className="text-lg font-semibold">{service.name}</span>
+                      <span className="text-green-600 text-xl font-medium">₹{service.price}</span>
                     </div>
                     {
                       service.slotsLeft > 0 ? (
-                        <div className="flex flex-col items-center gap-3 md:gap-1">
+                        <div className="flex flex-col items-center gap-1">
                         {service.selectionType === 'checkbox' && (
                           <input
                             type="checkbox"
-                            className="w-12 h-10 md:w-5 md:h-5 text-blue-500 rounded-lg focus:ring-blue-400"
+                            className="w-5 h-5 text-blue-500 rounded-lg focus:ring-blue-400"
                             checked={services.some((s) => s._id === service._id)}
                             onChange={() => toggleService(service)}
                           />
@@ -235,7 +235,7 @@ const Services = () => {
                             onQuantityChange={(quantity) => updateServiceQuantity(service._id, quantity)}
                           />
                         )}
-                        <span className={`${service.slotsLeft < 10 ? 'text-red-500 border-red-500' : 'text-green-500 border-green-500'} text-2xl md:text-[10px] text-center border px-4 py-1  md:px-2 md:py-1 rounded-2xl font-semibold`}>
+                        <span className={`${service.slotsLeft < 10 ? 'text-red-500 border-red-500' : 'text-green-500 border-green-500'} text-[12px] md:text-[10px] text-center border px-2 py-1 rounded-2xl font-semibold`}>
                           {service.slotsLeft} Left
                         </span>
                       </div>
@@ -291,7 +291,7 @@ const Services = () => {
      <button
      onClick={handleProceed}
      disabled={services.length === 0}
-     className={`w-full py-8 md:py-6 mt-4 rounded-sm text-4xl md:text-3xl 
+     className={`w-full py-5 mt-4 text-2xl md:text-xl 
      ${services.length === 0 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 text-white"}`}>
      Proceed
     </button>
