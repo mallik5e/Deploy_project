@@ -46,8 +46,6 @@ const MonthlyCalendar = () => {
       sessionStorage.setItem('visit-tracked', 'true');
     }
   }, []);
-  
-  
 
 
    const nextSlide = () => {
@@ -124,8 +122,8 @@ const MonthlyCalendar = () => {
   
         {/* calendar */}
       <div className='space-y-10 sm:space-y-3'>
-     <h2 className="text-xl ml-4 lg:ml-20 text-violet-400 mt-4 font-bold">SELECT DATE FOR EVENT :</h2>
-        <div className="w-full sm:max-w-[690px] xl:w-[600px]  sm:mx-auto lg:ml-28 mt-6 py-3 md:p-4 sm:px-6 bg-white/90 rounded-2xl shadow-sm">
+      <h2 className="text-xl ml-4 lg:ml-20 text-violet-400 mt-4 font-bold">SELECT DATE FOR EVENT :</h2>
+        <div className="w-full max-w-full sm:max-w-[690px] xl:w-[600px] m-auto mt-6 py-3 sm:px-4 md:p-4 lg:ml-28 bg-white/90 rounded-2xl sm:shadow-sm">
             {/* <h2 className="text-xl md:text-base mb-4 font-bold">SELECT DATE FOR EVENT :</h2>*/}
       <div className="flex justify-center gap-8 items-center mb-4">
         <button onClick={prevMonth} className={`p-2  rounded-xl ${currentDate.isSame(minMonth, 'month') ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={currentDate.isSame(minMonth, 'month')}>❮</button>
@@ -178,12 +176,12 @@ const MonthlyCalendar = () => {
    </div>
 
    {/*images */}
-   <div className="flex w-[550px] mx-auto lg:mx-30 lg:my-10 xl:m-5 sm:min-w-175 md:max-h-135">
+   <div className="hidden md:flex w-[550px] mx-auto lg:mx-30 xl:m-5 sm:min-w-175 md:max-h-135">
     <div className="relative flex items-center justify-center mt-8 lg:mt-12"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       <img
-         className="custom-img h-[460px] md:min-w-170 md:min-h-125"
+         className="w-[550px] h-[460px] md:min-w-170 md:min-h-125"
          src={images[currentIndex].src} 
          alt={images[currentIndex].alt}
          loading="eager" fetchpriority="high"
