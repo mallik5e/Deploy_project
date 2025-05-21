@@ -56,7 +56,7 @@ const Sidebar = () => {
         >
       <option value="" className="bg-blue-500 text-white" disabled>Select an option</option>
       {categories.map((cat, index) => (
-        <option key={cat._id || `${cat.category}-${index}`} value={cat.category} className="text-[10px] font-semibold">
+        <option key={cat._id || `${cat.category}-${index}`} value={cat.category} className="text-[9px] md:text-[10px] font-semibold">
            {cat.category}
         </option>
       ))}
