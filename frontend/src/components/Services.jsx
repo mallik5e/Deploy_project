@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 //import { LiaChevronCircleDownSolid } from "react-icons/lia";
 //import { IoChevronDownCircleSharp } from "react-icons/io5";
 import { IoChevronDownCircle } from "react-icons/io5";
+import { ShoppingCart, ChevronRight } from 'lucide-react';
 //import { TbSquareRoundedChevronsDownFilled } from "react-icons/tb";
 
 const QuantitySelector = ({ quantity, onQuantityChange }) => {
@@ -66,39 +67,7 @@ const Services = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
  const [atBottom, setAtBottom] = useState(false);
-  const [showScrollIcon, setShowScrollIcon] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const isAtBottom =
-        window.innerHeight + window.scrollY >= document.body.scrollHeight - 5;
-      const isAtTop = window.scrollY <= 5;
-      const scrollable = document.body.scrollHeight > window.innerHeight;
-
-      setShowScrollIcon(scrollable);
-      setAtBottom(isAtBottom && !isAtTop);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-   const handleScrollClick = () => {
-    if (atBottom) {
-      // Instantly jump to top
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth", // Jump instantly
-      });
-    } else {
-      // Scroll down step-by-step
-      window.scrollBy({
-        top: 600,
-        behavior: "smooth", // Smooth scroll 100px
-      });
-    }
-  };
+ const [showScrollIcon, setShowScrollIcon] = useState(false);
 
 
 
@@ -165,13 +134,66 @@ const Services = () => {
     }));
   };
 
+  //reload page
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = "";
+      sessionStorage.setItem("shouldRedirectHome", "true");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  //scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      const isAtBottom =
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 5;
+      const isAtTop = window.scrollY <= 5;
+      const scrollable = document.body.scrollHeight > window.innerHeight;
+
+      setShowScrollIcon(scrollable);
+      setAtBottom(isAtBottom && !isAtTop);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+   const handleScrollClick = () => {
+    if (atBottom) {
+      // Instantly jump to top
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // Jump instantly
+      });
+    } else {
+      // Scroll down step-by-step
+      window.scrollBy({
+        top: 600,
+        behavior: "smooth", // Smooth scroll 100px
+      });
+    }
+  };
+
+  const formatDate = (selectedDate) => {
+    const date = new Date(selectedDate);
+    const day = date.getDate();
+    const month = date.toLocaleString('en-US', { month: 'short' });
+    return `${day}'${month} 05:00 AM - 06:00 PM |`;
+  };
+
   const handleProceed = () => {
     navigate('/userdetails');
   };
 
-  
-
-
+  //console.log("services: ",services);
+  //console.log("services: ",services.length);
   return (
     <div>
        <Helmet>
@@ -193,29 +215,46 @@ const Services = () => {
        {/* header  <h2 className="text-6xl md:text-3xl font-bold text-center mb-12 md:mb-8">Available Services</h2> bg-gray-100*/}
       <div>
       <h1 className='text-3xl text-gray-800 font-bold mx-4 lg:mx-10 mt-5'>Elements Photo Shoots</h1>
-      <h4 className='text-xl md:text-lg mx-4 lg:mx-10'>Elements Bangalore</h4>
+     <div className='md:flex'>
+       <h4 className='text-xl md:text-lg ml-4 lg:ml-10'>{selectedDate ? formatDate(selectedDate) : ''}</h4>
+      <h4 className='text-xl md:text-lg mx-4 lg:mx-1'> Elements Bangalore</h4>
+     </div>
       <hr className="border-t-4 border-gray-300 mx-4 lg:mx-10 my-2 w-[90%]" />
       </div>
     <div className='flex'>
-      <div className="min-h-screen md:min-w-full lg:min-w-250  p-2 lg:p-8">
+      <div className="min-h-screen md:min-w-full lg:min-w-250 p-2 lg:p-8">
        
 
         {loading ? (
-            <div className="fixed inset-0 flex justify-center items-center z-50 bg-white/50">
+         
+          <div className="fixed inset-0 flex justify-center items-center z-50 bg-white/50">
            <div className="w-6 h-6 border-2 border-gray-500 border-t-transparent rounded-full animate-spin"></div>
          </div>
+
         ) : servicesData.length > 0 ? (
           servicesData.map((category) => (
-            <div key={category.category} className="bg-white rounded-2xl shadow-lg p-5 mb-5">
-              <h3 onClick={() => toggleCategory(category.category)} className="text-lg gap-10 flex justify-between font-semibold text-blue-600 mb-4">
-                {category.category} {openCategory[category.category] ? <Minus /> : <Plus />}
+            <div key={category.category} className="bg-white rounded-2xl shadow-sm md:shadow-lg p-5 mb-5">
+              <h3 onClick={() => toggleCategory(category.category)} className="text-lg gap-10 flex justify-between font-semibold text-blue-600  mb-4">
+                {category.category} {openCategory[category.category] ? <Minus className='bg-blue-100 rounded-full p-1 shrink-0' /> : <Plus className='bg-blue-100 rounded-full p-1 shrink-0'/>}
               </h3>
               {openCategory[category.category] &&
                 category.options.map((service) => (
                   <div key={service._id} className="flex justify-between items-center bg-gray-50 rounded-lg px-2 py-4 mb-4 md:p-4 md:mb-2">
                     <div className="flex flex-col">
                       <span className="text-lg font-semibold">{service.name}</span>
-                      <span className="text-green-600 text-lg font-medium">₹{service.price}</span>
+                     <div className='flex gap-2 items-center'>
+                        {
+                          service.discount ? (
+                              <>
+                                 <span className="text-gray-500 line-through text-sm font-medium">₹{service.price}</span>
+                                <span className="text-green-600 text-lg font-medium">₹{service.price - service.discount} </span>
+                                <span className="text-red-600 bg-red-100 text-xs font-medium px-2 py-1 rounded-full">₹{service.discount} OFF </span>
+                              </>
+                          ) : (
+                            <span className="text-green-600 text-lg font-medium">₹{service.price}</span>
+                          )
+                        }  
+                     </div>
                     </div>
                     {
                       service.slotsLeft > 0 ? (
@@ -264,11 +303,11 @@ const Services = () => {
                 <li key={service._id} className="flex items-center text-lg text-gray-600 py-1">
                   <span className='font-semibold'>{service.name} (x{service.quantity})</span>
                {/* <TbRosetteDiscountCheckFilled className="text-green-700 text-xl ml-2" />    */}
-               <CircleCheckBig className="text-green-700 text-2xl ml-2"/>
+               <CircleCheckBig className="text-green-700 text-2xl ml-2 shrink-0"/>
                 </li>
               ))
             ) : (
-              <li className='text-center text-lg'>No services selected ...</li>
+              <li className='text-center text-base text-gray-600'>No services selected ...</li>
             )}
           </ul>
           <div className='hidden xl:block mt-20'>
@@ -288,13 +327,21 @@ const Services = () => {
     </div>
     <div className="fixed bottom-0 left-0 w-full shadow-md z-50 xl:hidden">
      <button
-     onClick={handleProceed}
-     disabled={services.length === 0}
-     className={`w-full py-4 mt-4 text-xl 
-     ${services.length === 0 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 text-white"}`}>
-     Proceed
-    </button>
+    onClick={handleProceed}
+    disabled={services.length === 0}
+    className={`w-full flex items-center justify-between p-3 md:py-5 text-lg font-medium
+      ${services.length === 0 
+        ? "bg-gray-300 text-gray-600 cursor-not-allowed" 
+        : "bg-blue-500 hover:bg-blue-600 text-white"}`}>
+    <span className="flex items-center text-xl md:text-2xl gap-2">
+      <ShoppingCart size={28}/>
+      (x{services.length})
+    </span>
+     <span className='flex gap-1 font-semibold'>Proceed <ChevronRight size={28}/></span>
+  </button>
     </div>
+    
+
 
  {showScrollIcon && (
         <button
