@@ -91,7 +91,7 @@ const AddEvent = () => {
                    >
                        <option value="" className="bg-blue-500 text-white" disabled>Select a category</option>
                        {categories.map((cat, index) => (
-                           <option key={cat._id || `${cat.category}-${index}`} value={cat.category} className="text-[8px] md:text-[12px] font-semibold">
+                           <option key={cat._id || `${cat.category}-${index}`} value={cat.category} className="text-[5px] md:text-[12px] font-semibold">
                                {cat.category}
                            </option>
                        ))}
