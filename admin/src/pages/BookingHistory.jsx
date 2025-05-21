@@ -159,7 +159,7 @@ const BookingHistory = () => {
                     {booking.services && booking.services.length > 0 ? (
                         booking.services.map((service, i) => (
                           <p key={i} className="flex pb-2">
-                            <IoMdArrowDropright className="text-gray-500 text-center" size={25} />
+                            <IoMdArrowDropright className="text-gray-500 text-center shrink-0" size={25} />
                             {service.name}
                           </p>
                         ))
@@ -169,7 +169,7 @@ const BookingHistory = () => {
                       {booking.addOns && booking.addOns.length > 0 ? (
                           booking.addOns.map((addOn, i) => (
                             <p key={i} className="flex px-4 font-semibold text-[15px] text-gray-800 ">
-                              <BsDot className="text-gray-500 text-center pt-0" size={25} />
+                              <BsDot className="text-gray-500 text-center pt-0 shrink-0" size={25} />
                               {`${addOn.name}`}
                             </p>
                           ))
