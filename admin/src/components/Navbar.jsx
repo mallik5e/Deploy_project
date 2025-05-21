@@ -164,7 +164,7 @@ useEffect(() => {
           </button>
 
           {isSettingsOpen && (
-            <div className="absolute right-0 top-10 bg-white shadow-lg rounded-lg w-48 overflow-hidden">
+            <div className="absolute right-0 top-10 bg-white shadow-lg rounded-lg w-48 overflow-hidden z-50">
               <ul className="text-gray-800">
               <Link to='/payment'><li onClick={() => setSettingsOpen(false)} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Payment Integration</li></Link>
               <Link to='/transaction'><li onClick={() => setSettingsOpen(false)} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Transactions</li></Link>
@@ -222,7 +222,7 @@ useEffect(() => {
           </button>
 
           {isProfileOpen && (
-            <div className="absolute right-0 top-12 bg-white shadow-lg rounded-lg w-40">
+            <div className="absolute right-0 top-12 bg-white shadow-lg rounded-lg w-40 z-50">
               <ul className="text-gray-800">
               <Link to='/profile'><li onClick={() => setProfileOpen(false)}  className="px-4 py-2 hover:bg-gray-100 cursor-pointer">My Profile</li></Link>
                 {/*<li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Reports</li> */}
