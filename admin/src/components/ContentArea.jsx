@@ -100,7 +100,7 @@ const ContentArea = ({ events }) => {
               {booking.services && booking.services.length > 0 ? (
                 booking.services.map((service, i) => (
                   <p key={i} className="flex items-center pb-1">
-                    <IoMdArrowDropright className="text-gray-500" size={20} />
+                    <IoMdArrowDropright className="text-gray-500 shrink-0" size={20} />
                     {service.name}
                   </p>
                 ))
@@ -110,7 +110,7 @@ const ContentArea = ({ events }) => {
               {booking.addOns && booking.addOns.length > 0 && (
                 booking.addOns.map((addOn, i) => (
                   <p key={i} className="flex items-center pl-1 md:pl-6 text-[15px] text-gray-800 font-semibold">
-                    <BsDot className="text-gray-500 text-center" size={25} />
+                    <BsDot className="text-gray-500 text-center shrink-0" size={25} />
                     {addOn.name}
                   </p>
                 ))
