@@ -104,7 +104,7 @@ const verifyStatus = (req, res) => {
         merchantTransactionId: merchantTransactionId,  // ✅ Ensure correct key name
         amount: totalAmount * 100,
         mobileNumber: "9999999999",
-        redirectUrl:`https://deploy-project-1-ndgn.onrender.com/api/user/payment-status/${merchantTransactionId}`,
+        redirectUrl:`https://deploy-project-k4im.onrender.com/api/user/payment-status/${merchantTransactionId}`,
         redirectMode:'POST',
         paymentInstrument: { type: "PAY_PAGE" }
       };
