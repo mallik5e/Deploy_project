@@ -20,6 +20,8 @@ const UserDetails = () => {
   const [phone, setPhone] = useState("+91");
   //const [invoiceId, setInvoiceId] = useState("");
 
+   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [emailError, setEmailError] = useState("");
   const [confirmEmailError, setConfirmEmailError] = useState("");
 
@@ -29,10 +31,6 @@ const UserDetails = () => {
 
 
   const ItemPrice = bookingData.services.reduce((total, service) => total + (service.price*service.quantity), 0);
-  {/*const totalAmount = bookingData.services.reduce((total, service) => {
-    const discountedPrice = service.price - (service.discount || 0);
-    return total + discountedPrice;
-  }, 0);*/}
   const totalDiscount = bookingData.services.reduce((total, service) => total + (service.discount || 0), 0);
 
   const serviceTotal = bookingData.services.reduce((total, service) => {
@@ -43,7 +41,6 @@ const UserDetails = () => {
   const addOnTotal = bookingData.addOns?.reduce((total, addOn) => {
     return total + addOn.price;
   }, 0) || 0;
- 
   
   const totalAmount = serviceTotal + addOnTotal;
   
@@ -57,11 +54,25 @@ const UserDetails = () => {
       });
   }, [ItemPrice, totalDiscount, totalAmount, updateBookingData]);
 
-  // Generate invoiceId once on mount
+   // Generate invoiceId once on mount
   useEffect(() => {
     const newId = `${uuidv4().slice(0, 8).toUpperCase()}`;
     //setInvoiceId(newId);
     setFormData(prev => ({ ...prev, id: newId }));
+  }, []);
+
+  //reload page
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = "";
+      sessionStorage.setItem("shouldRedirectHome", "true");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
   }, []);
 
 
@@ -88,8 +99,6 @@ const UserDetails = () => {
     setIsChecked(!isChecked);
     if (!isChecked) setShowCheckboxError(false); // ✅ Hide error when checkbox is selected
   };
-
-  const backendUrl = 'http://localhost:5000';
 
   // Real-time email validation
   useEffect(() => {
@@ -135,7 +144,7 @@ const UserDetails = () => {
     updateBookingData(updatedBookingData);
     
     try {
-      const response = await axios.post(`https://deploy-project-k4im.onrender.com/api/user/booking`, updatedBookingData);
+      const response = await axios.post(`${backendUrl}/api/user/booking`, updatedBookingData);
       sessionStorage.setItem("bookingId", response.data.bookingId);
       setShowSaveButton(false);
       toast.success("Now make payment to confirm your booking.");
@@ -148,32 +157,28 @@ const UserDetails = () => {
   
   const handleMobileSubmit = async (e) => {
     e.preventDefault();
-    
     if (!formData.fullName || !formData.email  || !formData.city) {
       toast.error("Please fill all required fields.");
       return;
     }
-  
    if (formData.email !== formData.confirmEmail) {
       toast.error("Emails do not match.");
       return;
     } 
-  
     if (!phone || phone.length < 10) {
       toast.error("Enter a valid contact number.");
       return;
     }
-  
+
     const updatedBookingData = {
       ...bookingData,
       userInfo: { ...formData, contactNumber: phone },
     };
-  
     updateBookingData(updatedBookingData);
      // Collapse the form on submit
     setIsCollapsed(true);
     try {
-      const response = await axios.post(`https://deploy-project-k4im.onrender.com/api/user/booking`, updatedBookingData);
+      const response = await axios.post(`${backendUrl}/api/user/booking`, updatedBookingData);
       sessionStorage.setItem("bookingId", response.data.bookingId);
       setShowSaveButton(false);
       toast.success("Now make payment to confirm your booking.");
@@ -193,7 +198,7 @@ const UserDetails = () => {
 
   useEffect(() => {
     // Fetch the active payment gateway from backend
-    fetch("https://deploy-project-k4im.onrender.com/api/user/active-gateway")
+    fetch(backendUrl+"/api/user/active-gateway")
       .then((res) => res.json())
       .then((data) => setGateway(data.gateway))
       .catch((error) => console.error("Error fetching gateway:", error));
@@ -225,7 +230,7 @@ const UserDetails = () => {
     }
    
     try {
-        const response = await axios.post('https://deploy-project-k4im.onrender.com/api/user/pay', {
+        const response = await axios.post(backendUrl+'/api/user/pay', {
             txnId: 'txn' + Date.now(),
             amount: totalAmount,
             productInfo: bookingData.services.map(service => service.name).join(', '),
@@ -264,7 +269,7 @@ const UserDetails = () => {
     }
     try {
       const orderId = "ORDER_" + new Date().getTime(); // Generate a unique order ID
-      const response = await axios.post("https://deploy-project-k4im.onrender.com/api/user/initiate-payment", { totalAmount, orderId });
+      const response = await axios.post(backendUrl+"/api/user/initiate-payment", { totalAmount, orderId });
 
       if (response.data.success) {
           window.location.href = response.data.data.instrumentResponse.redirectInfo.url; // Redirect to PhonePe
@@ -300,7 +305,7 @@ const UserDetails = () => {
     }
     try {
       // Create order on backend
-      const { data } = await axios.post("https://deploy-project-k4im.onrender.com/api/user/create-order", {
+      const { data } = await axios.post(backendUrl+"/api/user/create-order", {
         totalAmount,
         currency: "INR",
         receipt: `order_rcpt_${Date.now()}`,//creating an unique orderId for transaction.
@@ -324,7 +329,7 @@ const UserDetails = () => {
           console.log("razorpay_signature",razorpay_signature)
 
           // Send for verification
-          const verifyRes = await axios.post("https://deploy-project-k4im.onrender.com/api/user/verify-payment", {
+          const verifyRes = await axios.post(backendUrl+"/api/user/verify-payment", {
             razorpay_order_id,
             razorpay_payment_id,
             razorpay_signature,
@@ -362,7 +367,7 @@ const handlePaypalPayment = async () => {
       return;
     }
   try {
-    const { data } = await axios.post("https://deploy-project-k4im.onrender.com/api/user/create-payment", { totalAmount });
+    const { data } = await axios.post(backendUrl+"/api/user/create-payment", { totalAmount });
     console.log("data.approvalUrl: ",data.approvalUrl);
     if (data?.approvalUrl) {
       window.location.href = data.approvalUrl; // Redirect to PayPal
@@ -384,6 +389,7 @@ const handlePaypalPayment = async () => {
                 name="description"
                 content="Book your next photoshoot online. Find top photoshoot packages for pre-wedding, birthday, and maternity shoots in your city. Packages from ₹500."
               />
+               <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
                <meta name="keywords" content="photoshoot, pre-wedding, maternity, book photoshoot online, family photoshoot, photoshoot in bangalore,post wedding photoshoot in bangalore, pre wedding photo shoot places in bangalore, maternity photoshoot in bangalore, photoshoot places in kanakapura road, outdoor photoshoot places in bangalore" />
                <meta name="author" content="Book Event" />
       
@@ -398,7 +404,7 @@ const handlePaypalPayment = async () => {
       <h4 className='text-xl md:text-lg mx-4 lg:mx-20'>Elements Bangalore</h4>
       <hr className="border-t-4 border-gray-300 mx-4 lg:mx-20 my-3 w-[90%]" />
       </div>
-   <div className="flex gap-20 p-2">
+   <div className="flex max-w-[800px] m-auto xl:m-0 gap-20 p-2">
     {/*checkout inputs form {!isCollapsed && (  <h2 className="text-5xl md:text-2xl font-bold mb-12 md:mb-6">User Details</h2> */}
     {!isCollapsed && (    <div  className="md:min-w-xl items-start mx-2 xl:ml-35  p-5 bg-white shadow-lg rounded-2xl">
       <h2 className="text-2xl font-bold mb-8 md:mb-4">User Details :</h2> 
@@ -500,9 +506,10 @@ const handlePaypalPayment = async () => {
    {  /* summary */}
    
     <div className="hidden xl:block">
-    <div className="min-w-100 border mx-30 mt-30 mb-2 p-6 rounded-lg space-y-6 bg-white shadow-md">
+    <div className="min-w-100 border mx-30 mt-25 mb-2 p-6 rounded-lg space-y-6 bg-white shadow-md">
   <h2 className="text-2xl font-semibold text-gray-800">Price Details</h2>
-  <div className="space-y-1">
+  <div>
+    <div className="space-y-1">
     <div className="flex justify-between">
       <p className="text-lg font-semibold text-gray-700">Item Price:</p>
       <p className="text-lg font-semibold text-gray-700">₹{ItemPrice}</p>
@@ -520,11 +527,13 @@ const handlePaypalPayment = async () => {
       </div>
     )}
   </div>
-  <div className="space-y-1">
+  <hr />
+  <div className="space-y-1 mt-3">
     <div className="flex justify-between">
-      <p className="text-indigo-900 text-lg font-semibold">Total Amount:</p>
-      <p className="text-indigo-900 text-lg font-semibold">₹{totalAmount}</p>
+      <p className="text-indigo-900 text-xl font-semibold">Total Amount:</p>
+      <p className="text-indigo-900 text-2xl font-semibold">₹{totalAmount}</p>
     </div>
+  </div>
     <span className="text-xs font-semibold text-gray-500">*Prices are inclusive of GST and excluding Booking Fees</span>
   </div>
 </div>
