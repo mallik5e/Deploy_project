@@ -201,10 +201,9 @@ const Services = () => {
        
 
         {loading ? (
-            <div className="flex justify-center items-center py-10">
-            <div className="w-4 h-4 border-2 border-gray-500 border-t-transparent rounded-full animate-spin"> </div>
-            <span className='text-xl font-semibold gap-10 text-gray-400'></span>
-          </div>
+            <div className="fixed inset-0 flex justify-center items-center z-50 bg-white/50">
+           <div className="w-6 h-6 border-2 border-gray-500 border-t-transparent rounded-full animate-spin"></div>
+         </div>
         ) : servicesData.length > 0 ? (
           servicesData.map((category) => (
             <div key={category.category} className="bg-white rounded-2xl shadow-lg p-5 mb-5">
