@@ -61,20 +61,6 @@ const UserDetails = () => {
     setFormData(prev => ({ ...prev, id: newId }));
   }, []);
 
-  //reload page
-  useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      e.preventDefault();
-      e.returnValue = "";
-      sessionStorage.setItem("shouldRedirectHome", "true");
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
-
 
   const [formData, setFormData] = useState({
     id:"",
