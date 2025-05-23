@@ -62,7 +62,7 @@ const AddOn = () => {
                 type="checkbox"
                 checked={addOn.isSelected}
                 onChange={() => handleToggleAddOn(addOn._id)}
-                className="ml-4 w-5 h-5"
+                className="ml-4 w-5 h-5 shrink-0"
               />
             </li>
           ))
