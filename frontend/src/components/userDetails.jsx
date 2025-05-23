@@ -554,7 +554,7 @@ const handlePaypalPayment = async () => {
       </div>
     )}
   </div>
-  <hr />
+
   <div className="space-y-1 mt-3">
     <div className="flex justify-between">
       <p className="text-indigo-900 text-xl font-semibold">Total Amount:</p>
