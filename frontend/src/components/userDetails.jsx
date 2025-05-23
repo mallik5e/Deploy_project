@@ -241,6 +241,8 @@ const UserDetails = () => {
       setShowCheckboxError(true); // Show error message if checkbox is not checked
       return;
     }
+      //  Set skip flag BEFORE submitting the form
+    sessionStorage.setItem("skipReloadRedirect", "true");
    
     try {
         const response = await axios.post(backendUrl+'/api/user/pay', {
@@ -280,6 +282,10 @@ const UserDetails = () => {
       setShowCheckboxError(true); // Show error message if checkbox is not checked
       return;
     }
+    
+    // Set skip flag BEFORE submitting the form
+    sessionStorage.setItem("skipReloadRedirect", "true");
+    
     try {
       const orderId = "ORDER_" + new Date().getTime(); // Generate a unique order ID
       const response = await axios.post(backendUrl+"/api/user/initiate-payment", { totalAmount, orderId });
@@ -311,6 +317,10 @@ const UserDetails = () => {
       setShowCheckboxError(true); // Show error message if checkbox is not checked
       return;
     }
+    
+    //Set skip flag BEFORE submitting the form
+    sessionStorage.setItem("skipReloadRedirect", "true");
+    
     const scriptLoaded = await loadRazorpayScript();
     if (!scriptLoaded) {
       alert("Failed to load Razorpay. Please check your internet connection.");
@@ -379,6 +389,10 @@ const handlePaypalPayment = async () => {
       setShowCheckboxError(true); // Show error message if checkbox is not checked
       return;
     }
+  
+   //Set skip flag BEFORE submitting the form
+   sessionStorage.setItem("skipReloadRedirect", "true");
+  
   try {
     const { data } = await axios.post(backendUrl+"/api/user/create-payment", { totalAmount });
     console.log("data.approvalUrl: ",data.approvalUrl);
