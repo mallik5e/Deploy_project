@@ -1,8 +1,11 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { RxCross1 } from "react-icons/rx";
 import { HiXCircle } from "react-icons/hi";
 
 const PaymentFailure = () => {
+  useEffect(() => {
+  sessionStorage.removeItem("skipReloadRedirect");
+}, []);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen ">
     <div className="bg-red-200 shadow-lg rounded-2xl m-1 p-6 md:p-28 flex flex-col items-center">
