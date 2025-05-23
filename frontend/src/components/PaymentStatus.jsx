@@ -17,7 +17,11 @@ const PaymentSuccess = () => {
   const paymentUpdatedRef = useRef(false); // ✅ Use useRef to prevent duplicate calls
   const bookingId = sessionStorage.getItem('bookingId'); // Get bookingId from sessionStorage
 
-  console.log(bookingId)
+  //console.log(bookingId)
+
+  useEffect(() => {
+  sessionStorage.removeItem("skipReloadRedirect");
+  }, []);
 
   
   // Fetch user and company data, then post to generate invoice
