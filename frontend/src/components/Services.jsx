@@ -138,15 +138,24 @@ const Services = () => {
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       e.preventDefault();
-      e.returnValue = "";
+      e.returnValue = ""; // Show confirmation
       sessionStorage.setItem("shouldRedirectHome", "true");
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
+
+  //redirecting reload to home
+  useEffect(() => {
+    if (sessionStorage.getItem("shouldRedirectHome") === "true") {
+      sessionStorage.removeItem("shouldRedirectHome");
+      navigate("/", { replace: true }); // Redirect to home
+    }
+  }, [navigate]);
 
   //scrolling
   useEffect(() => {
