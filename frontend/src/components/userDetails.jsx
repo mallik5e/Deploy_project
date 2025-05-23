@@ -29,6 +29,7 @@ const UserDetails = () => {
 
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  const navigate = useNavigate();
 
   const ItemPrice = bookingData.services.reduce((total, service) => total + (service.price*service.quantity), 0);
   const totalDiscount = bookingData.services.reduce((total, service) => total + (service.discount || 0), 0);
@@ -61,6 +62,34 @@ const UserDetails = () => {
     setFormData(prev => ({ ...prev, id: newId }));
   }, []);
 
+  //reload page
+   useEffect(() => {
+    // Check if user should be redirected home after reload
+    const shouldRedirect = sessionStorage.getItem("shouldRedirectHome") === "true";
+    const shouldSkip = sessionStorage.getItem("skipReloadRedirect") === "true";
+
+    if (shouldRedirect && !shouldSkip) {
+      sessionStorage.removeItem("shouldRedirectHome");
+      sessionStorage.removeItem("skipReloadRedirect");
+      // Force hard redirect to home
+    window.location.replace("/");
+    }
+
+    // Set reload flag if user reloads the page
+    const handleBeforeUnload = (e) => {
+      if (sessionStorage.getItem("skipReloadRedirect") === "true") return;
+      sessionStorage.setItem("shouldRedirectHome", "true");
+      e.preventDefault();
+      e.returnValue = "";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [navigate]);
+
 
   const [formData, setFormData] = useState({
     id:"",
@@ -74,8 +103,6 @@ const UserDetails = () => {
 
  // console.log("invoiceId: ",formData.id)
 
-  const navigate = useNavigate();
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -83,7 +110,7 @@ const UserDetails = () => {
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
-    if (!isChecked) setShowCheckboxError(false); // ✅ Hide error when checkbox is selected
+    if (!isChecked) setShowCheckboxError(false); //  Hide error when checkbox is selected
   };
 
   // Real-time email validation
